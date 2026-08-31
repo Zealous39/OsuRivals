@@ -1,11 +1,11 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-async function getLegacyUserTop100(user, mode = 0, limit = 1) {
+const getLegacyUserTop100 = async (user, mode = 0, limit = 1) => {
   // mode: 0 = osu!, 1 = Taiko, 2 = Catch, 3 = Mania
   const url = `https://osu.ppy.sh/api/get_user_best?k=${process.env.OSU_API_KEY}&u=${user}&m=${mode}&limit=${limit}`
 }
-async function getLegacyUserData(user, mode = 0)
+export const getLegacyUserData = async (user, mode = 0) =>
 {
   // mode: 0 = osu!, 1 = Taiko, 2 = Catch, 3 = Mania
   const url = `https://osu.ppy.sh/api/get_user?k=${process.env.OSU_API_KEY}&u=${user}&m=${mode}`;
@@ -20,6 +20,13 @@ async function getLegacyUserData(user, mode = 0)
     }
 
     const userData = data[0];
+
+    return {
+      'User_id': userData.user_id,
+      'User': userData.username,
+      'Rank': userData.pp_rank,
+      'PP': userData.pp_raw
+    }
     console.log(`User_id: ${userData.user_id}`);
     console.log(`User: ${userData.username}`);
     console.log(`Rank: #${userData.pp_rank}`);
@@ -30,4 +37,3 @@ async function getLegacyUserData(user, mode = 0)
 }
 
 // Search by username or user ID:
-getLegacyUserData('Zeal_');
