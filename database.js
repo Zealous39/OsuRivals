@@ -6,9 +6,13 @@ dotenv.config()
 const pool = mysql.createPool
 ({
     host: process.env.MYSQL_HOST,
+    port: process.env.MYSQL_PORT,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE
+    database: process.env.MYSQL_DATABASE,
+    ssl: {
+        rejectUnauthorized: false
+    }
 }).promise();
 
 
@@ -31,14 +35,14 @@ async function getRank(user_id)
 async function createData(user_id)
 {
     const result = await pool.query(`
-    INSERT INTO new_input (user_id)
+    INSERT INTO users (user_id)
     VALUES (?)
     `, [user_id])
     return result
 }
 
+
+
 //const ranks = await getRank(86427)
 
-const result = await createData(1353)
-
-console.log(result)
+const result = await createData(10631294)
