@@ -27,10 +27,6 @@ export const getLegacyUserData = async (user, mode = 0) =>
       'Rank': userData.pp_rank,
       'PP': userData.pp_raw
     }
-    console.log(`User_id: ${userData.user_id}`);
-    console.log(`User: ${userData.username}`);
-    console.log(`Rank: #${userData.pp_rank}`);
-    console.log(`PP: ${userData.pp_raw}`);
   } catch (error) {
     console.error('API Error:', error.message);
   }
