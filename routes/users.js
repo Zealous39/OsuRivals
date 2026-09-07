@@ -1,7 +1,7 @@
 import express from 'express';
+import * as Controller from '../controllers/users.js';
+
 export const userRouter = express.Router();
 
-import {getAllUsers, searchUser} from '../controllers/users.js';
-
-userRouter.route('/getAllUsers').get(getAllUsers);
-userRouter.route('/searchUser').post(searchUser)
+userRouter.route('/getAllUsers').get(Controller.getAllUsers);
+userRouter.route('/searchUser').post(Controller.searchUser)
