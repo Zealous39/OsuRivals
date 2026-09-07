@@ -1,4 +1,4 @@
-import { getLegacyUserData } from '../osu_api.js';
+import { getLegacyUserData, getLegacyUserDataTop100 } from '../osu_api.js';
 import * as UserModel from '../models/users.js'
 
 
@@ -7,6 +7,8 @@ export const searchUser = async (req, res) =>{
     const userData = await getLegacyUserData(username);
     const {User_id, User , Rank, PP} = userData
     await UserModel.createUser(User_id, User, Rank, PP)
+    const userData2 = await getLegacyUserDataTop100(username);
+    await UserModel.createUserTop100(userData2)
     res.json(userData);
 }
 
