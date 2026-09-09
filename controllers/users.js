@@ -1,5 +1,6 @@
-import { getLegacyUserData, getLegacyUserDataTop100 } from '../osu_api.js';
+import { getLegacyUserData, getLegacyUserDataTop100 } from '../services/osu_api.js'
 import * as UserModel from '../models/users.js'
+import * as TopModel from '../models/users_top_100.js'
 
 
 export const searchUser = async (req, res) =>{
@@ -8,7 +9,7 @@ export const searchUser = async (req, res) =>{
     const {User_id, User , Rank, PP} = userData
     await UserModel.createUser(User_id, User, Rank, PP)
     const userData2 = await getLegacyUserDataTop100(username);
-    await UserModel.createUserTop100(userData2)
+    await TopModel.createUserTop100(userData2)
     res.json(userData);
 }
 

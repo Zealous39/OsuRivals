@@ -1,6 +1,7 @@
 import express from 'express';
-import {pool} from './database.js';
+import {pool} from './db/database.js';
 import {userRouter} from './routes/users.js'
+import {scoreRouter} from './routes/users_top_100.js';
 const app = express();
 
 
@@ -10,6 +11,7 @@ app.use(express.static('./public'));
 app.use(express.json());
 
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/topscores', scoreRouter)
 
 
 const PORT = 3000;
