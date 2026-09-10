@@ -1,4 +1,4 @@
-import {pool} from '../database.js'
+import {pool} from '../db/database.js';
 
 export const createUser = async (User_id, User, Rank, PP) =>
 {
@@ -7,24 +7,6 @@ export const createUser = async (User_id, User, Rank, PP) =>
     VALUES (?, ?, ?, ?)
     `, [User_id, User, Rank, PP])
     return result
-}
-
-export const createUserTop100 = async (userData2) =>
-{
-    const top100 = userData2.slice(0,50);
-
-    if (top100.length === 0) return;
-
-    const values = top100.map((u) => [
-        u.user_id,
-        u.beatmap_id,
-        u.pp
-    ]);
-
-    const result = await pool.query(`
-        INSERT INTO users_top_100 (user_id, beatmap_id, pp)
-        VALUES ?`, [values])
-        return result
 }
 
 
@@ -47,7 +29,7 @@ export const getUserById = async (User_id) => {
     const result = await pool.query(`
         SELECT *
         FROM users
-        WHERE user_ud = ?`, [User_id])
+        WHERE user_id = ?`, [User_id])
     return result
 }
 
