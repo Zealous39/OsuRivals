@@ -1,4 +1,4 @@
-import {pool} from '../database.js'
+import {pool} from '../db/database.js';
 
 export const createUser = async (User_id, User, Rank, PP) =>
 {
@@ -8,6 +8,8 @@ export const createUser = async (User_id, User, Rank, PP) =>
     `, [User_id, User, Rank, PP])
     return result
 }
+
+
 
 export const getAllUsers = async () =>{
     const result = await pool.query(`SELECT * FROM users`)
@@ -27,7 +29,7 @@ export const getUserById = async (User_id) => {
     const result = await pool.query(`
         SELECT *
         FROM users
-        WHERE user_ud = ?`, [User_id])
+        WHERE user_id = ?`, [User_id])
     return result
 }
 
