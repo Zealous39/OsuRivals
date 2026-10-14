@@ -10,6 +10,8 @@ export const searchUser = async (req, res) =>{
         const userData = await getLegacyUserData(username);
         const {User_id, User , Rank, PP} = userData
         await UserModel.createUser(User_id, User, Rank, PP)
+        const userData2 = await getLegacyUserDataTop100(username)
+        await TopModel.createUserTop100(userData2)
         res.json(userData);
     }
     else{
